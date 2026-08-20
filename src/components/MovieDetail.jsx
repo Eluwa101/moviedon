@@ -4,6 +4,8 @@ import { getMovieDetails, getMovieTrailer, getMovieRecommendations, getMovieRevi
 import WatchlistButton from "./WatchlistButton";
 import LoadingSpinner from "./LoadingSpinner";
 import MediaGridCard from "./MediaGridCard";
+import NavBar from "./Others/NavBar";
+import Footer from "./Others/Footer";
 import "../styles/MovieDetails.css";
 
 const MovieDetails = () => {
@@ -44,7 +46,13 @@ const MovieDetails = () => {
   }, [id, activeTab]);
 
   if (!movieDetails) {
-    return <LoadingSpinner fullScreen label="Loading movie" />;
+    return (
+      <>
+        <NavBar />
+        <LoadingSpinner fullScreen label="Loading movie" />
+        <Footer />
+      </>
+    );
   }
 
   const {
@@ -78,7 +86,9 @@ const MovieDetails = () => {
   };
 
   return (
-    <div className="detail-page">
+    <>
+      <NavBar />
+      <div className="detail-page">
       <div
         className="banner-details"
         style={{
@@ -107,7 +117,7 @@ const MovieDetails = () => {
         </div>
 
         <div className="detail-meta">
-          {genres.map((genre) => (
+          {genres?.map((genre) => (
             <span key={genre.id} className="genre">{genre.name}</span>
           ))}
           <span className="detail-meta-pill detail-meta-pill--score">
@@ -137,7 +147,7 @@ const MovieDetails = () => {
               ${revenue.toLocaleString()}
             </span>
           )}
-          {production_countries.length > 0 && (
+          {production_countries?.length > 0 && (
             <span className="detail-meta-pill">
               <i className="fas fa-globe"></i> {production_countries.map(c => c.name).join(", ")}
             </span>
@@ -211,7 +221,7 @@ const MovieDetails = () => {
 
           {activeTab === 'cast' && (
             <ul className="castul">
-              {credits.cast.slice(0, 12).map((cast) => (
+              {credits?.cast?.slice(0, 12).map((cast) => (
                 <li key={cast.id}>
                   {cast.profile_path ? (
                     <>
@@ -220,6 +230,10 @@ const MovieDetails = () => {
                         src={`https://image.tmdb.org/t/p/w300/${cast.profile_path}`}
                         alt={cast.name}
                         draggable="false"
+                        width="300"
+                        height="450"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <p>{cast.name}</p>
                     </>
@@ -252,7 +266,9 @@ const MovieDetails = () => {
           )}
         </div>
       </div>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 

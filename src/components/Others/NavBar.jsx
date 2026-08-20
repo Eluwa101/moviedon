@@ -6,19 +6,19 @@ import '../../styles/NavBar.css';
 
 const primaryLinks = [
   { to: '/shorts', label: 'Shorts', isRoute: true },
-  { href: '#movies', label: 'Movies' },
-  { href: '#tvshows', label: 'TV Shows' },
-  { href: '#categories', label: 'Categories' },
+  { href: '/#movies', label: 'Movies' },
+  { href: '/#tvshows', label: 'TV Shows' },
+  { href: '/#categories', label: 'Categories' },
 ];
 
 const otherLinks = [
-  { href: '#anime', label: 'Anime' },
-  { href: '#iranian', label: 'Iranian' },
-  { href: '#turkish', label: 'Turkish' },
-  { href: '#nowplaying', label: 'Now Playing' },
-  { href: '#trailers', label: 'Trailers' },
-  { href: '#performers', label: 'Popular Performers' },
-  { href: '#companies', label: 'Top Companies' },
+  { href: '/#anime', label: 'Anime' },
+  { href: '/#iranian', label: 'Iranian' },
+  { href: '/#turkish', label: 'Turkish' },
+  { href: '/#nowplaying', label: 'Now Playing' },
+  { href: '/#trailers', label: 'Trailers' },
+  { href: '/#performers', label: 'Popular Performers' },
+  { href: '/#companies', label: 'Top Companies' },
   { to: '/search', label: 'Search', isRoute: true },
 ];
 

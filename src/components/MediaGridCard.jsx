@@ -15,6 +15,10 @@ const MediaGridCard = ({ item, linkTo, icon = 'fa-star' }) => {
             src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
             alt={title}
             className="media-grid-card__img"
+            width="500"
+            height="750"
+            loading="lazy"
+            decoding="async"
           />
         ) : (
           <div className="media-grid-card__placeholder">

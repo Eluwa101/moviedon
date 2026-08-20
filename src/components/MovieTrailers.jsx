@@ -44,6 +44,10 @@ const MovieTrailers = () => {
                   src={`https://img.youtube.com/vi/${movie.trailerKey}/mqdefault.jpg`}
                   alt={movie.title}
                   className="media-grid-card__img"
+                  width="320"
+                  height="180"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="media-grid-card__overlay">
                   <i className="fa-brands fa-youtube media-grid-card__play"></i>

@@ -76,16 +76,6 @@ const SideButtons = () => {
               <i className="fas fa-gear"></i>
             </button>
           </li>
-          <li>
-            <button
-              type="button"
-              className="sidebtn__action"
-              onClick={() => window.open('', '_blank')}
-              aria-label="Open Discord"
-            >
-              <i className="fab fa-discord"></i>
-            </button>
-          </li>
           {showScrollTop && (
             <li>
               <button

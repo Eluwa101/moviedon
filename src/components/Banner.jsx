@@ -48,6 +48,11 @@ const Banner = () => {
                 src={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`}
                 alt={movie.title}
                 draggable="false"
+                width="1280"
+                height="720"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+                decoding="async"
               />
               <div className="banner-gradient"></div>
             </div>

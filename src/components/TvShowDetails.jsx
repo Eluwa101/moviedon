@@ -10,6 +10,8 @@ import SeasonDetails from "./TV/SeasonDetails";
 import WatchlistButton from "./WatchlistButton";
 import LoadingSpinner from "./LoadingSpinner";
 import MediaGridCard from "./MediaGridCard";
+import NavBar from "./Others/NavBar";
+import Footer from "./Others/Footer";
 import "../styles/MovieDetails.css";
 
 const TvShowDetails = () => {
@@ -54,7 +56,13 @@ const TvShowDetails = () => {
   }, [id, activeTab]);
 
   if (!tvShowDetails) {
-    return <LoadingSpinner fullScreen label="Loading TV show" />;
+    return (
+      <>
+        <NavBar />
+        <LoadingSpinner fullScreen label="Loading TV show" />
+        <Footer />
+      </>
+    );
   }
 
   const {
@@ -81,7 +89,9 @@ const TvShowDetails = () => {
   };
 
   return (
-    <div className="detail-page">
+    <>
+      <NavBar />
+      <div className="detail-page">
       <div
         className="banner-details"
         style={{
@@ -230,7 +240,7 @@ const TvShowDetails = () => {
 
           {activeTab === "cast" && (
             <ul className="castul">
-              {credits.cast.slice(0, 12).map((cast) => (
+              {credits?.cast?.slice(0, 12).map((cast) => (
                 <li key={cast.id}>
                   {cast.profile_path ? (
                     <>
@@ -239,6 +249,10 @@ const TvShowDetails = () => {
                         src={`https://image.tmdb.org/t/p/w300/${cast.profile_path}`}
                         alt={cast.name}
                         draggable="false"
+                        width="300"
+                        height="450"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <p>{cast.name}</p>
                     </>
@@ -273,7 +287,9 @@ const TvShowDetails = () => {
 
         </div>
       </div>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 

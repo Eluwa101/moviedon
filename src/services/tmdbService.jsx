@@ -13,30 +13,16 @@ export const getTrendingMovies = async (page = 1) => {
     const response = await tmdbService.get(
       `/movie/popular?include_adult=false&api_key=${TMDB_API_KEY}&page=${page}`
     );
-
-    const trendingMovies = response.data.results;
-
-    const moviesWithImagesAndVideos = await Promise.all(
-      trendingMovies.map(async (movie) => {
-        const movieDetails = await tmdbService.get(
-          `/movie/${movie.id}?include_adult=false&api_key=${TMDB_API_KEY}&append_to_response=images,videos`
-        );
-        return movieDetails.data;
-      })
-    );
-
-    return moviesWithImagesAndVideos;
+    return response.data.results;
   } catch (error) {
     console.error('Error fetching trending movies:', error);
     throw error;
   }
 };
 
-
-
 export const getNowPlayingMovies = async () => {
   try {
-    const response = await tmdbService.get(`/movie/now_playing?include_adult=false&api_key=${TMDB_API_KEY}&append_to_response=videos,images`);
+    const response = await tmdbService.get(`/movie/now_playing?include_adult=false&api_key=${TMDB_API_KEY}`);
     return response.data.results;
   } catch (error) {
     console.error('Error fetching trending movies:', error);
@@ -47,7 +33,7 @@ export const getNowPlayingMovies = async () => {
 export const getPopularMovies = async (page = 1) => {
   try {
     const response = await tmdbService.get(
-      `/movie/top_rated?include_adult=false&api_key=${TMDB_API_KEY}&page=${page}&append_to_response=videos,images`
+      `/movie/top_rated?include_adult=false&api_key=${TMDB_API_KEY}&page=${page}`
     );
     return response.data.results;
   } catch (error) {
@@ -59,7 +45,7 @@ export const getPopularMovies = async (page = 1) => {
 export const getTrendingTvShows = async (page = 1) => {
   try {
     const response = await tmdbService.get(
-      `/trending/tv/day?include_adult=false&api_key=${TMDB_API_KEY}&page=${page}&append_to_response=videos,images`
+      `/trending/tv/day?include_adult=false&api_key=${TMDB_API_KEY}&page=${page}`
     );
     return response.data.results;
   } catch (error) {
@@ -71,7 +57,7 @@ export const getTrendingTvShows = async (page = 1) => {
 export const getPopularTvShows = async (page = 1) => {
   try {
     const response = await tmdbService.get(
-      `/tv/top_rated?include_adult=false&api_key=${TMDB_API_KEY}&page=${page}&append_to_response=videos,images`
+      `/tv/top_rated?include_adult=false&api_key=${TMDB_API_KEY}&page=${page}`
     );
     return response.data.results;
   } catch (error) {
@@ -99,8 +85,6 @@ export const getTvShowDetails = async (id) => {
     }
 
     const data = response.data;
-
-    console.log('TV Show Details API Response:', data);
 
     const seasonPromises = data.seasons.map(async (season) => {
       const episodes = await getSeasonEpisodes(id, season.season_number);
@@ -147,13 +131,11 @@ export const getSeasonEpisodes = async (tvShowId, seasonNumber) => {
 
     const data = await response.json();
 
-    console.log(`Season ${seasonNumber} Episodes API Response:`, data);
-
     const episodes = data.episodes.map((episode) => ({
       id: episode.id,
       name: episode.name,
       still_path: episode.still_path,
-      image: `https://image.tmdb.org/t/p/original/${episode.still_path}`, 
+      image: `https://image.tmdb.org/t/p/w300/${episode.still_path}`,
     }));
 
     return episodes;
@@ -174,8 +156,6 @@ export const searchMedia = async (query) => {
     }
 
     const data = await response.json();
-
-    console.log('Search API Response:', data);
 
     const results = data.results.map((result) => ({
       id: result.id,

@@ -11,12 +11,12 @@ const SeasonDetails = ({ tvShowId, seasonNumber }) => {
       try {
         const seasonEpisodes = await getSeasonEpisodes(tvShowId, seasonNumber);
         setEpisodes(seasonEpisodes);
-      } catch (error) {
-        // Handle error
+      } catch {
+        setEpisodes([]);
       }
     };
 
-    fetchSeasonEpisodes(); 
+    fetchSeasonEpisodes();
   }, [tvShowId, seasonNumber]);
 
   return (
@@ -25,7 +25,17 @@ const SeasonDetails = ({ tvShowId, seasonNumber }) => {
         {episodes.map((episode, index) => (
           <li className='episode-list' key={episode.id}>
             <Link to={`/player/${tvShowId}?e=${index + 1}&s=${seasonNumber}`}>
-            {episode.image && <img draggable={'false'} src={episode.image} alt={`Episode ${episode.name}`} />}
+            {episode.image && (
+              <img
+                draggable={'false'}
+                src={episode.image}
+                alt={`Episode ${episode.name}`}
+                width="300"
+                height="169"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
             </Link>
             
             
@@ -42,7 +52,7 @@ const SeasonDetails = ({ tvShowId, seasonNumber }) => {
 };
 
 SeasonDetails.propTypes = {
-  tvShowId: PropTypes.number.isRequired,
+  tvShowId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   seasonNumber: PropTypes.number.isRequired,
 };
 

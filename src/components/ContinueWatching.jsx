@@ -31,6 +31,10 @@ const ContinueWatching = () => {
                   <img
                     src={`https://image.tmdb.org/t/p/w342/${item.poster_path}`}
                     alt={item.title || item.name}
+                    width="342"
+                    height="513"
+                    loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <div className="continue-poster-placeholder">

@@ -16,14 +16,6 @@ const legalLinks = [
   { href: '/dmca', label: 'DMCA' },
 ];
 
-const socialLinks = [
-  { href: '', icon: 'fas fa-globe', label: 'Website' },
-  { href: '', icon: 'fab fa-discord', label: 'Discord' },
-  { href: '', icon: 'fab fa-github', label: 'GitHub' },
-  { href: '', icon: 'fab fa-instagram', label: 'Instagram' },
-  { href: '', icon: 'fab fa-x-twitter', label: 'X' },
-];
-
 const Footer = () => (
   <footer className="site-footer">
     <div className="site-footer__glow"></div>
@@ -36,20 +28,6 @@ const Footer = () => (
         <p className="site-footer__tagline">
           Moviedon is a free, and open-source streaming website. No account required — just pick something and watch.
         </p>
-        <div className="site-footer__social">
-          {socialLinks.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="site-footer__social-btn"
-              aria-label={item.label}
-            >
-              <i className={item.icon}></i>
-            </a>
-          ))}
-        </div>
       </div>
 
       <div className="site-footer__columns">
@@ -80,12 +58,7 @@ const Footer = () => (
         </div>
 
         <div className="site-footer__col">
-          <h4>Community</h4>
-          <ul>
-            <li><a href="" target="_blank" rel="noreferrer">Contact</a></li>
-            <li><a href="" target="_blank" rel="noreferrer">Discord Server</a></li>
-            <li><a href="" target="_blank" rel="noreferrer">Source Code</a></li>
-          </ul>
+          <h4>Notice</h4>
           <p className="site-footer__note">
             <i className="fa-solid fa-circle-info"></i> Please disable your ad blocker for the best experience.
           </p>

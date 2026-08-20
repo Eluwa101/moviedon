@@ -1,39 +1,41 @@
 // src/index.jsx
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { WatchlistProvider } from './context/WatchlistContext';
 import { ContinueWatchingProvider } from './context/ContinueWatchingContext';
 import { ToastProvider } from './context/ToastContext';
-import Movies from './components/Movies';
-import TvShows from './components/TvShows';
-import Banner from './components/Banner';
-import MovieDetail from './components/MovieDetail';
-import TvShowDetails from './components/TvShowDetails';
-import Player from './components/Player';
-import SearchPage from './components/SearchPage';
 import NavBar from './components/Others/NavBar';
-import DMCA from './components/Others/NavSideFiles/DMCA';
-import About from './components/Others/NavSideFiles/About';
-import Categories from './components/Categories';
-import TopActorsActresses from './components/TopActorsActresses';
-import TopCompanies from './components/TopCompanies';
-import NowPlaying from './components/NowPlaying';
 import Footer from './components/Others/Footer';
-import Anime from './components/Anime';
-import AnimeTv from './components/AnimeTv';
-import Turkish from './components/Turkish';
-import TurkishTv from './components/TurkishTv';
-import Iranian from './components/Iranian';
-import IranianTv from './components/IranianTv';
-import MovieTrailers from './components/MovieTrailers';
-import SideBtn from './components/Others/SideButtons';
-import ContinueWatching from './components/ContinueWatching';
-import MyList from './components/MyList';
-import Shorts from './components/Shorts';
-import NotFound from './components/NotFound';
+import LoadingSpinner from './components/LoadingSpinner';
 import reportWebVitals from './reportWebVitals';
 import './styles/root.css';
+
+const Movies = lazy(() => import('./components/Movies'));
+const TvShows = lazy(() => import('./components/TvShows'));
+const Banner = lazy(() => import('./components/Banner'));
+const MovieDetail = lazy(() => import('./components/MovieDetail'));
+const TvShowDetails = lazy(() => import('./components/TvShowDetails'));
+const Player = lazy(() => import('./components/Player'));
+const SearchPage = lazy(() => import('./components/SearchPage'));
+const DMCA = lazy(() => import('./components/Others/NavSideFiles/DMCA'));
+const About = lazy(() => import('./components/Others/NavSideFiles/About'));
+const Categories = lazy(() => import('./components/Categories'));
+const TopActorsActresses = lazy(() => import('./components/TopActorsActresses'));
+const TopCompanies = lazy(() => import('./components/TopCompanies'));
+const NowPlaying = lazy(() => import('./components/NowPlaying'));
+const Anime = lazy(() => import('./components/Anime'));
+const AnimeTv = lazy(() => import('./components/AnimeTv'));
+const Turkish = lazy(() => import('./components/Turkish'));
+const TurkishTv = lazy(() => import('./components/TurkishTv'));
+const Iranian = lazy(() => import('./components/Iranian'));
+const IranianTv = lazy(() => import('./components/IranianTv'));
+const MovieTrailers = lazy(() => import('./components/MovieTrailers'));
+const SideBtn = lazy(() => import('./components/Others/SideButtons'));
+const ContinueWatching = lazy(() => import('./components/ContinueWatching'));
+const MyList = lazy(() => import('./components/MyList'));
+const Shorts = lazy(() => import('./components/Shorts'));
+const NotFound = lazy(() => import('./components/NotFound'));
 
 const HomePage = () => (
   <>
@@ -64,18 +66,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ContinueWatchingProvider>
         <ToastProvider>
           <Router>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/shorts" element={<Shorts />} />
-              <Route path="/movie/:id" element={<MovieDetail />} />
-              <Route path="/tv/:id" element={<TvShowDetails />} />
-              <Route path="/player/:id" element={<Player />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/my-list" element={<MyList />} />
-              <Route path="/dmca" element={<DMCA />} />
-              <Route path="/about" element={<About />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Suspense fallback={<LoadingSpinner fullScreen label="Loading" />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/shorts" element={<Shorts />} />
+                <Route path="/movie/:id" element={<MovieDetail />} />
+                <Route path="/tv/:id" element={<TvShowDetails />} />
+                <Route path="/player/:id" element={<Player />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/my-list" element={<MyList />} />
+                <Route path="/dmca" element={<DMCA />} />
+                <Route path="/about" element={<About />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
           </Router>
         </ToastProvider>
       </ContinueWatchingProvider>

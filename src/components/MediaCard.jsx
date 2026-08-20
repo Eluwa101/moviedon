@@ -14,6 +14,10 @@ const MediaCard = ({ media }) => {
           <img
             src={`https://image.tmdb.org/t/p/w500/${media.poster_path}`}
             alt={title}
+            width="500"
+            height="750"
+            loading="lazy"
+            decoding="async"
           />
         ) : (
           <div className="media-card-placeholder">
