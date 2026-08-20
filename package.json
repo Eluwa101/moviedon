@@ -1,5 +1,5 @@
 {
-  "name": "devevil-tv",
+  "name": "moviedon",
   "version": "0.1.0",
   "private": true,
   "main": "src/index.jsx",
@@ -54,6 +54,5 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
     "file-loader": "^6.2.0"
-  },
-  "homepage": "https://tv.devevil.com"
+  }
 }

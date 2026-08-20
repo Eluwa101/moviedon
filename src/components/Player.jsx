@@ -1,6 +1,6 @@
 // Player.js
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useContinueWatching } from '../context/ContinueWatchingContext';
@@ -15,8 +15,6 @@ const Player = () => {
   const season = queryParams.get('s') || '';
   const episode = queryParams.get('e') || '';
   const { addToContinueWatching } = useContinueWatching();
-
-  const [showAd, setShowAd] = useState(true);
 
   useEffect(() => {
     const trackWatch = async () => {
@@ -66,19 +64,6 @@ const Player = () => {
           <i className="fa-solid fa-xmark"></i>
         </Link>
       </div>
-
-      {showAd && (
-        <div className="ad">
-          <i className="fa-solid fa-xmark" onClick={() => setShowAd(false)} role="button" tabIndex={0} aria-label="Close"></i>
-          <h1>Support Us</h1>
-          <p>
-            Your donations help us maintain and improve our services, ensuring we can continue offering you this premium, ad-free entertainment every day and forever.{' '}
-            <a href="https://devevil.com/#donate" rel="noreferrer" target="_blank" style={{ textDecoration: 'underline' }}>
-              Support us by making a donation.
-            </a>
-          </p>
-        </div>
-      )}
     </div>
   );
 };

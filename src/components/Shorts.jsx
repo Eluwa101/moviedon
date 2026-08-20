@@ -42,7 +42,7 @@ const Shorts = () => {
   }, []);
 
   const handleScroll = useCallback(
-    (e) => {
+    () => {
       if (!shortsContainerRef.current) return;
 
       const container = shortsContainerRef.current;
@@ -108,10 +108,6 @@ const Shorts = () => {
       </>
     );
   }
-
-  const currentShort = shorts[currentIndex];
-  const currentVideo = currentShort?.videos?.[0];
-  const videoKey = currentVideo?.key;
 
   return (
     <>

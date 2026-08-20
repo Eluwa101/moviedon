@@ -117,15 +117,6 @@ const Navbar = () => {
               <i className="fas fa-magnifying-glass"></i>
               <span className="search-trigger-hint">Search... (Ctrl+K)</span>
             </button>
-            <a
-              className="signupbtn"
-              href="https://devevil.com/users/signup"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <span className="signupbtn__full">Signup For DevEvil Universe</span>
-              <span className="signupbtn__short">Sign Up</span>
-            </a>
             <button
               type="button"
               className={`navbar__toggle ${isMenuOpen ? 'navbar__toggle--active' : ''}`}

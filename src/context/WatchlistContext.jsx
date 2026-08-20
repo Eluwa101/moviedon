@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-const STORAGE_KEY = 'devevil_tv_watchlist';
+const STORAGE_KEY = 'moviedon_watchlist';
 
 const WatchlistContext = createContext(null);
 

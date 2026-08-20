@@ -112,7 +112,7 @@ const SideButtons = () => {
             <div className="theme-modal__header">
               <div>
                 <h2 id="theme-modal-title">Theme Settings</h2>
-                <p>Customize DevEvil TV to match your vibe</p>
+                <p>Customize Moviedon to match your vibe</p>
               </div>
               <button
                 type="button"
