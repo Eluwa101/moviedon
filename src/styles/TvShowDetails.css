@@ -1,0 +1,15 @@
+.episode-ul {
+	display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.episode-list img{
+	margin-top: 10px;
+	border-radius: 15px;
+}
+
+.episode-list:hover {
+  transform: scale(1.08);
+  opacity: .5;
+}
