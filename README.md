@@ -1,152 +1,55 @@
-<div align="center" dir="auto">
-<h1 align="center">Moviedon</h1>
-<p align="center">Moviedon is a free and open-source movie and tv show streaming site. Moviedon offers users the chance to watch their favorite movies and series completely free of charge, without any annoying ads or the need to create an account.</p>
-</div>
-<br>
+# Moviedon
 
+Moviedon is a responsive, open-source movie and TV discovery app powered by The Movie Database (TMDB). Browse popular titles, trailers, genres, performers, and companies, then keep a local watchlist and continue-watching history.
 
-## 📖 Table of Contents
+## Prerequisites
 
-1. [Features](#-features)  
-2. [Prerequisites](#-prerequisites)  
-3. [Getting a TMDB API Key](#-getting-a-tmdb-api-key)  
-4. [Installation](#-installation)  
-5. [Configuration](#-configuration)  
-6. [Customizing Styles and Pages](#-customizing-styles-and-pages)  
-7. [Enabling Adult & NSFW Content](#-enabling-adult--nsfw-content)
-8. [Run & Build](#-run--build)  
-9. [Publishing](#-publishing)  
-10. [License](#-license)
+- Node.js 18 or newer
+- npm
+- A TMDB API key
 
----
+## Getting started
 
-## 🚀 Features
+1. Install dependencies:
 
-- Movie and TV show listings and streaming
-- Easy to customize styles and components  
-- Fully responsive and modern UI  
-- Lightweight, clean, and developer-friendly codebase  
-- Open-source and free to use
-
----
-
-## 🔧 Prerequisites
-
-Before you begin, make sure you have the following installed:
-
-- **Node.js** (v14 or higher)
-- **git**
-- **npm** (comes with Node.js)
-- **TMDB API Key** (Required)
-
----
-
-## 🔑 Getting a TMDB API Key
-
-To use TMDB's API, you'll need a free API key.
-
-👉 Follow the official guide here:  
-[TMDB API Getting Started](https://developer.themoviedb.org/docs/getting-started)
-
-Once you have your key, you’ll use it in the configuration step.
-
----
-
-## 📦 Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone <your-repository-url>
-   cd moviedon
-   ```
-
-2. **Install dependencies:**
    ```bash
    npm install
    ```
 
----
+2. Create a local environment file:
 
-## ⚙️ Configuration
-
-1. **Rename** the `.env.example` file to `.env`:
    ```bash
-   mv .env.example .env
+   cp .env.example .env
    ```
 
-2. **Fill in your API key:**
-   Open `.env` and set your TMDB API key:
+3. Set your TMDB API key in `.env`:
+
    ```env
-   REACT_APP_TMDB_API_KEY=your_tmdb_api_key_here
+   REACT_APP_TMDB_API_KEY=your_tmdb_api_key
    ```
 
----
+4. Start the development server:
 
-## 🎨 Customizing Styles and Pages
-
-By default, styles are defined using CSS `:root` selectors in each style file. This approach was required in an earlier version, and although not ideal, it's currently necessary to manually update each one.
-
-To update colors and themes:
-
-1. **Edit every CSS file** and modify the `:root` variables.
-2. **Also update colors** in:
    ```bash
-   src/components/Others/SideButtons.jsx
+   npm start
    ```
 
-> ⚠️ Please don’t remove or modify core functionality — you're free to customize layout, styles, and content, but try to preserve the app’s essential logic.
+## Scripts
 
----
+- `npm start` — start the development server
+- `npm run build` — create a production build
+- `npm run lint` — check code quality
+- `npm test` — run tests
 
-## 🔞 Enabling Adult & NSFW Content
+## Deployment
 
-If you want to allow adult and NSFW movies or TV shows to be displayed:
+Run `npm run build` and deploy the contents of the generated `build/` directory. The included `public/.htaccess` provides history fallback for Apache hosts.
 
-1. Open the following file:
-   ```bash
-   src/services/tmdbService.jsx
-   ```
+## Notes
 
-2. Replace **all instances** of:
-   ```js
-   include_adult=false
-   ```
-   with:
-   ```js
-   include_adult=true
-   ```
+- TMDB attribution and usage must comply with [TMDB’s terms](https://www.themoviedb.org/terms-of-use).
+- API keys supplied through `REACT_APP_*` variables are included in the client build. Use a TMDB key intended for client-side usage and apply TMDB-side restrictions where available.
 
-> ⚠️ **Note:** This enables the listing of adult content. However, **many embedded streaming players do not support NSFW content**, so availability for streaming is **not guaranteed**.
+## License
 
----
-
-## 🧪 Run & Build
-
-### Start the app in development mode:
-```bash
-npm run start
-```
-
-### Build the app for production:
-```bash
-npm run build
-```
-
----
-
-## 🌐 Publishing
-
-After building the app:
-
-1. Locate the generated `build/` folder.
-2. Upload the contents of this folder to your hosting provider (e.g., Netlify, Vercel, Firebase, or your own server).
-
-That's it — your site is live!
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License** — feel free to use, modify, and share it.
-
----
+MIT

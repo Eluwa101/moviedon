@@ -87,7 +87,7 @@ const Navbar = () => {
         <div className="navbar__inner">
           <div className="navbar__left">
             <Link to="/" className="navbar__logo" onClick={closeMenu}>
-              <img src="assets/logo2.png" alt="Logo" className="logo" />
+              <img src="/assets/logo2.png" alt="Moviedon" className="logo" />
             </Link>
 
             <nav className="navbar__desktop" aria-label="Main navigation">

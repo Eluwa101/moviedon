@@ -9,14 +9,19 @@ export const WatchlistProvider = ({ children }) => {
   const [watchlist, setWatchlist] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? JSON.parse(stored) : [];
+      const parsed = stored ? JSON.parse(stored) : [];
+      return Array.isArray(parsed) ? parsed : [];
     } catch {
       return [];
     }
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(watchlist));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(watchlist));
+    } catch {
+      // Storage may be unavailable in private browsing or when quota is exceeded.
+    }
   }, [watchlist]);
 
   const addToWatchlist = useCallback((item) => {

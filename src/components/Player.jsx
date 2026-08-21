@@ -1,8 +1,5 @@
-// Player.js
-
-import React, { useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useContinueWatching } from '../context/ContinueWatchingContext';
 import { getMovieQuickInfo, getTvQuickInfo } from '../services/tmdbService';
 import '../styles/Player.css';
@@ -15,56 +12,69 @@ const Player = () => {
   const season = queryParams.get('s') || '';
   const episode = queryParams.get('e') || '';
   const { addToContinueWatching } = useContinueWatching();
+  const [showAdNotice, setShowAdNotice] = useState(true);
+
+  useEffect(() => {
+    const dismissTimer = window.setTimeout(() => setShowAdNotice(false), 10000);
+    return () => window.clearTimeout(dismissTimer);
+  }, []);
 
   useEffect(() => {
     const trackWatch = async () => {
       if (!id) return;
+
       try {
-        let item;
+        const item = season && episode
+          ? await getTvQuickInfo(id)
+          : await getMovieQuickInfo(id);
+
         if (season && episode) {
-          item = await getTvQuickInfo(id);
           item.season = Number(season);
           item.episode = Number(episode);
-        } else {
-          item = await getMovieQuickInfo(id);
         }
         addToContinueWatching(item);
       } catch {
-        // silent
+        // Playback remains available if tracking metadata cannot be loaded.
       }
     };
+
     trackWatch();
   }, [id, season, episode, addToContinueWatching]);
 
-  let embedUrl;
-  let detailsUrl;
-
-  if (season && episode) {
-    embedUrl = `https://multiembed.mov/?video_id=${encodeURIComponent(id)}&tmdb=1&s=${encodeURIComponent(season)}&e=${encodeURIComponent(episode)}`;
-    detailsUrl = `/tv/${id}`;
-  } else {
-    embedUrl = `https://multiembed.mov/?video_id=${encodeURIComponent(id)}&tmdb=1`;
-    detailsUrl = `/movie/${id}`;
-  }
+  const isEpisode = Boolean(season && episode);
+  const embedUrl = isEpisode
+    ? `https://multiembed.mov/?video_id=${encodeURIComponent(id)}&tmdb=1&s=${encodeURIComponent(season)}&e=${encodeURIComponent(episode)}`
+    : `https://multiembed.mov/?video_id=${encodeURIComponent(id)}&tmdb=1`;
+  const detailsUrl = isEpisode ? `/tv/${id}` : `/movie/${id}`;
 
   return (
-    <div className="player">
+    <main className="player">
       <iframe
-        title="player"
+        title="Moviedon video player"
         src={embedUrl}
-        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
         allowFullScreen
-      ></iframe>
+        referrerPolicy="strict-origin-when-cross-origin"
+      />
 
-      <div className="overlay">
-        <Link to="/">
-          <i className="fa-solid fa-home"></i>
+      <nav className="overlay" aria-label="Player navigation">
+        <Link to="/" aria-label="Back to home">
+          <i className="fa-solid fa-home" aria-hidden="true"></i>
         </Link>
-        <Link to={detailsUrl}>
-          <i className="fa-solid fa-xmark"></i>
+        <Link to={detailsUrl} aria-label="Back to title details">
+          <i className="fa-solid fa-xmark" aria-hidden="true"></i>
         </Link>
-      </div>
-    </div>
+      </nav>
+
+      {showAdNotice && (
+        <aside className="player-ad-notice" role="status" aria-live="polite">
+          <p>Heads up: an ad may open before your movie starts.</p>
+          <button type="button" onClick={() => setShowAdNotice(false)} aria-label="Dismiss notice">
+            Got it
+          </button>
+        </aside>
+      )}
+    </main>
   );
 };
 

@@ -10,14 +10,19 @@ export const ContinueWatchingProvider = ({ children }) => {
   const [continueList, setContinueList] = useState(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? JSON.parse(stored) : [];
+      const parsed = stored ? JSON.parse(stored) : [];
+      return Array.isArray(parsed) ? parsed : [];
     } catch {
       return [];
     }
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(continueList));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(continueList));
+    } catch {
+      // Storage may be unavailable in private browsing or when quota is exceeded.
+    }
   }, [continueList]);
 
   const addToContinueWatching = useCallback((item) => {

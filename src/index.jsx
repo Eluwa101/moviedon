@@ -8,6 +8,7 @@ import { ToastProvider } from './context/ToastContext';
 import NavBar from './components/Others/NavBar';
 import Footer from './components/Others/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
+import ErrorBoundary from './components/ErrorBoundary';
 import reportWebVitals from './reportWebVitals';
 import './styles/root.css';
 
@@ -66,8 +67,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ContinueWatchingProvider>
         <ToastProvider>
           <Router>
-            <Suspense fallback={<LoadingSpinner fullScreen label="Loading" />}>
-              <Routes>
+            <ErrorBoundary>
+              <Suspense fallback={<LoadingSpinner fullScreen label="Loading" />}>
+                <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/shorts" element={<Shorts />} />
                 <Route path="/movie/:id" element={<MovieDetail />} />
@@ -78,8 +80,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path="/dmca" element={<DMCA />} />
                 <Route path="/about" element={<About />} />
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
           </Router>
         </ToastProvider>
       </ContinueWatchingProvider>

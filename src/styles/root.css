@@ -13,6 +13,7 @@
 @import url('./Toast.css');
 @import url('./NotFound.css');
 @import url('./LoadingSpinner.css');
+@import url('./ErrorBoundary.css');
 
 
 :root {

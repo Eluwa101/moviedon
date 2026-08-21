@@ -12,8 +12,8 @@ const browseLinks = [
 ];
 
 const legalLinks = [
-  { href: '/about', label: 'About' },
-  { href: '/dmca', label: 'DMCA' },
+  { to: '/about', label: 'About' },
+  { to: '/dmca', label: 'DMCA' },
 ];
 
 const Footer = () => (
@@ -23,10 +23,10 @@ const Footer = () => (
     <div className="site-footer__main">
       <div className="site-footer__brand">
         <Link to="/" className="site-footer__logo-link">
-          <img src="/assets/logo2.png" alt="Logo" className="site-footer__logo" />
+          <img src="/assets/logo2.png" alt="Moviedon" className="site-footer__logo" />
         </Link>
         <p className="site-footer__tagline">
-          Moviedon is a free, and open-source streaming website. No account required — just pick something and watch.
+          Moviedon is a free and open-source movie discovery website. No account required — just find something to watch.
         </p>
       </div>
 
@@ -36,11 +36,7 @@ const Footer = () => (
           <ul>
             {browseLinks.map((link) => (
               <li key={link.label}>
-                {link.isRoute ? (
-                  <Link to={link.to}>{link.label}</Link>
-                ) : (
-                  <a href={link.href}>{link.label}</a>
-                )}
+                {link.isRoute ? <Link to={link.to}>{link.label}</Link> : <a href={link.href}>{link.label}</a>}
               </li>
             ))}
           </ul>
@@ -50,9 +46,7 @@ const Footer = () => (
           <h4>Important</h4>
           <ul>
             {legalLinks.map((link) => (
-              <li key={link.label}>
-                <a href={link.href}>{link.label}</a>
-              </li>
+              <li key={link.label}><Link to={link.to}>{link.label}</Link></li>
             ))}
           </ul>
         </div>
@@ -60,7 +54,7 @@ const Footer = () => (
         <div className="site-footer__col">
           <h4>Notice</h4>
           <p className="site-footer__note">
-            <i className="fa-solid fa-circle-info"></i> Please disable your ad blocker for the best experience.
+            <i className="fa-solid fa-circle-info" aria-hidden="true"></i> Please disable your ad blocker for the best experience.
           </p>
         </div>
       </div>
@@ -69,7 +63,7 @@ const Footer = () => (
     <div className="site-footer__bottom">
       <p>© {new Date().getFullYear()} Moviedon. All rights reserved. <br /> All trademarks, logos, images, and content belong to their respective owners.</p>
       <p className="site-footer__credit">
-        Made with <span><i className='fas fa-heart footer-icon'></i></span> using React, TMDB API, <span><i className='fas fa-brain footer-icon'></i></span> & <span><i className='fas fa-coffee footer-icon'></i></span>
+        Made with <span><i className="fas fa-heart footer-icon" aria-hidden="true"></i></span> using React, TMDB API, <span><i className="fas fa-brain footer-icon" aria-hidden="true"></i></span> & <span><i className="fas fa-coffee footer-icon" aria-hidden="true"></i></span>
       </p>
       <span className="site-footer__version">v3.0</span>
     </div>

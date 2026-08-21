@@ -1,0 +1,43 @@
+.error-boundary {
+  display: grid;
+  min-height: 100vh;
+  padding: 24px;
+  place-items: center;
+  text-align: center;
+}
+
+.error-boundary > div {
+  max-width: 480px;
+}
+
+.error-boundary__eyebrow {
+  margin-bottom: 8px;
+  color: var(--sec);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-7);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.error-boundary h1 {
+  margin-bottom: 12px;
+  font-size: clamp(28px, 5vw, 44px);
+}
+
+.error-boundary p:not(.error-boundary__eyebrow) {
+  margin-bottom: 28px;
+  color: rgba(231, 231, 231, 0.7);
+}
+
+.error-boundary__button {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: var(--main);
+  font-weight: var(--fw-7);
+}
+
+.error-boundary__button:hover,
+.error-boundary__button:focus-visible {
+  background: var(--sec);
+}

@@ -1,94 +1,162 @@
-:root {
-  --bg: #080808;
-  --bg2: #19161f;
-  --main: #5f22d9;
-  --sec: #ac73ff;
-  --text: #e7e7e7;
-  --ff-inter: "Montserrat", sans-serif;
-  --section-heading: 40px;
-  --fs-lg: 22px;
-  --fs-md: 17px;
-  --fs-sm: 14px;
-  --fs-x-sm: 12px;
-  --fw-7: 700;
-  --fw-6: 600;
-  --fw-5: 500;
-  --px: 120px;
+.player {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg);
 }
 
-.player iframe{
+.player::before,
+.player::after {
+  content: '';
   position: absolute;
+  z-index: 12;
+  width: 42vw;
+  height: 130vh;
+  pointer-events: none;
+  opacity: 0.32;
+  filter: blur(22px);
+  transform: rotate(28deg) translateX(-130vw);
+  animation: player-light-sweep 9s ease-in-out infinite;
+}
 
-  top: 0;
-  left: 0;
+.player::before {
+  top: -20vh;
+  background: linear-gradient(90deg, transparent, rgba(172, 115, 255, 0.1), rgba(172, 115, 255, 0.7), transparent);
+}
 
+.player::after {
+  top: -35vh;
+  background: linear-gradient(90deg, transparent, rgba(95, 34, 217, 0.05), rgba(95, 34, 217, 0.55), transparent);
+  animation-delay: -4.5s;
+  animation-duration: 11s;
+}
+
+.player iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-
   border: 0;
-
   z-index: 11;
 }
 
-.player .overlay{
+.player .overlay {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  color: var(--main);
   position: absolute;
-  
-  top: 45px;
-  right: 15px;
-  
-  z-index: 12;
-
-  cursor: pointer;
+  top: 28px;
+  right: 20px;
+  z-index: 14;
 }
 
-.player .overlay i{
-  margin: 0 10px;
-  font-weight: bold;
-  font-size: 20px;
-  color: var(--main);
-}
-
-.fa-xmark{
-  font-size: 26px !important;
-}
-
-.ad {
-  text-align: center;
+.player .overlay a {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  margin-left: 8px;
+  place-items: center;
   color: var(--text);
+  background: rgba(8, 8, 8, 0.78);
+  border: 1px solid rgba(172, 115, 255, 0.45);
+  border-radius: 50%;
+}
+
+.player .overlay a:hover,
+.player .overlay a:focus-visible {
+  color: #fff;
   background: var(--main);
-  padding: 10px;
-  margin: 0 50px 10px 50px;
-  border-radius: 20px;
+}
+
+.player .overlay i {
+  font-size: 18px;
+}
+
+.player-ad-notice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 12;
+  top: 28px;
+  left: 50%;
+  z-index: 15;
+  max-width: calc(100% - 132px);
+  padding: 10px 12px 10px 16px;
+  color: var(--text);
+  background: linear-gradient(110deg, rgba(51, 19, 112, 0.97), rgba(25, 22, 31, 0.98), rgba(95, 34, 217, 0.9));
+  border: 1px solid rgba(206, 176, 255, 0.72);
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4), 0 0 20px rgba(145, 78, 255, 0.45);
+  transform: translateX(-50%);
+  animation: player-notice-glow 2.8s ease-in-out infinite;
 }
 
-.ad i {
-  cursor: pointer;
+.player-ad-notice p {
+  font-size: 13px;
+  font-weight: var(--fw-5);
+  white-space: nowrap;
 }
 
-.ad img {
-  border-radius: 15px;
-  width: 100%;
+.player-ad-notice button {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  color: #fff;
+  background: var(--main);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: var(--fw-7);
 }
 
-@media screen and (max-width: 600px){
-  .player .overlay i{
-    font-size: 16px;
+.player-ad-notice button:hover,
+.player-ad-notice button:focus-visible {
+  background: var(--sec);
+}
 
-    margin: 0 5px;
+@keyframes player-light-sweep {
+  0%, 18% {
+    opacity: 0;
+    transform: rotate(28deg) translateX(-130vw);
+  }
 
-    vertical-align: middle;
-    
-    &.fa-xmark{
-      font-size: 18px;
-    }
+  42% {
+    opacity: 0.34;
+  }
+
+  70%, 100% {
+    opacity: 0;
+    transform: rotate(28deg) translateX(250vw);
+  }
+}
+
+@keyframes player-notice-glow {
+  0%, 100% {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4), 0 0 14px rgba(145, 78, 255, 0.32);
+  }
+
+  50% {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 28px rgba(172, 115, 255, 0.7);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .player .overlay {
+    top: 16px;
+    right: 12px;
+  }
+
+  .player-ad-notice {
+    top: 66px;
+    max-width: calc(100% - 24px);
+  }
+
+  .player-ad-notice p {
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player::before,
+  .player::after,
+  .player-ad-notice {
+    animation: none;
   }
 }
