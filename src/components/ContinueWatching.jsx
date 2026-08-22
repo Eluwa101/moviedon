@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PlaybackLink from './PlaybackLink';
 import { useContinueWatching } from '../context/ContinueWatchingContext';
 import '../styles/ContinueWatching.css';
 
@@ -25,7 +25,7 @@ const ContinueWatching = () => {
       <div className="continue-row">
         {continueList.map((item) => (
           <div className="continue-card" key={`${item.media_type}-${item.id}`}>
-            <Link to={getPlayUrl(item)} className="continue-card-link">
+            <PlaybackLink to={getPlayUrl(item)} className="continue-card-link">
               <div className="continue-poster">
                 {item.poster_path ? (
                   <img
@@ -53,7 +53,7 @@ const ContinueWatching = () => {
                   </p>
                 )}
               </div>
-            </Link>
+            </PlaybackLink>
             <button
               type="button"
               className="continue-remove"

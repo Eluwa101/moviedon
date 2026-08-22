@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { getBannerMovies } from '../services/tmdbService';
 import { Link } from 'react-router-dom';
+import PlaybackLink from './PlaybackLink';
 import '../styles/Banner.css';
 
 const Banner = () => {
@@ -118,12 +119,12 @@ const Banner = () => {
 
         <div className="banner-nav">
           <div className="center-text">
-            <Link to={active ? `/player/${active.id}` : '/'}>
+            <PlaybackLink to={active ? `/player/${active.id}` : '/'}>
               <span>
                 Watch Now <i className="fa-solid fa-play banneri"></i>
               </span>
               <p>Instantly stream the movie online.</p>
-            </Link>
+            </PlaybackLink>
 
             <p className="line"></p>
 

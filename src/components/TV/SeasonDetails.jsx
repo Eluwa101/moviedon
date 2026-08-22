@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSeasonEpisodes } from '../../services/tmdbService';
-import { Link } from 'react-router-dom';
+import PlaybackLink from '../PlaybackLink';
 import PropTypes from 'prop-types';
 
 const SeasonDetails = ({ tvShowId, seasonNumber }) => {
@@ -24,7 +24,7 @@ const SeasonDetails = ({ tvShowId, seasonNumber }) => {
       <ul className='episode-ul'>
         {episodes.map((episode, index) => (
           <li className='episode-list' key={episode.id}>
-            <Link to={`/player/${tvShowId}?e=${index + 1}&s=${seasonNumber}`}>
+            <PlaybackLink to={`/player/${tvShowId}?e=${index + 1}&s=${seasonNumber}`}>
             {episode.image && (
               <img
                 draggable={'false'}
@@ -36,13 +36,13 @@ const SeasonDetails = ({ tvShowId, seasonNumber }) => {
                 decoding="async"
               />
             )}
-            </Link>
+            </PlaybackLink>
             
             
             <div className='episode-details'>
-            <Link to={`/player/${tvShowId}?e=${index + 1}&s=${seasonNumber}`}>
+            <PlaybackLink to={`/player/${tvShowId}?e=${index + 1}&s=${seasonNumber}`}>
             <p>{index + 1}. {episode.name}</p>
-            </Link>
+            </PlaybackLink>
             </div>
           </li>
         ))}

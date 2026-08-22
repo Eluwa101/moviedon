@@ -6,6 +6,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import MediaGridCard from "./MediaGridCard";
 import NavBar from "./Others/NavBar";
 import Footer from "./Others/Footer";
+import PlaybackLink from './PlaybackLink';
 import "../styles/MovieDetails.css";
 
 const MovieDetails = () => {
@@ -162,9 +163,9 @@ const MovieDetails = () => {
         
 
         <div className="detail-actions-panel">
-          <Link to={`/player/${id}`} className="detail-action-btn detail-action-btn--primary">
+          <PlaybackLink to={`/player/${id}`} className="detail-action-btn detail-action-btn--primary">
             <i className="fa-solid fa-play"></i> Watch Now
-          </Link>
+          </PlaybackLink>
 
           {trailerKey && (
             <a

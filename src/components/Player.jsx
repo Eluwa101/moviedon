@@ -15,7 +15,7 @@ const Player = () => {
   const [showAdNotice, setShowAdNotice] = useState(true);
 
   useEffect(() => {
-    const dismissTimer = window.setTimeout(() => setShowAdNotice(false), 10000);
+    const dismissTimer = window.setTimeout(() => setShowAdNotice(false), 120000);
     return () => window.clearTimeout(dismissTimer);
   }, []);
 
