@@ -16,7 +16,7 @@
   opacity: 0.32;
   filter: blur(22px);
   transform: rotate(28deg) translateX(-130vw);
-  animation: player-light-sweep 9s ease-in-out infinite;
+  animation: player-light-sweep 2.8s ease-out 1 both;
 }
 
 .player::before {
@@ -27,8 +27,8 @@
 .player::after {
   top: -35vh;
   background: linear-gradient(90deg, transparent, rgba(95, 34, 217, 0.05), rgba(95, 34, 217, 0.55), transparent);
-  animation-delay: -4.5s;
-  animation-duration: 11s;
+  animation-delay: 0.35s;
+  animation-duration: 2.4s;
 }
 
 .player iframe {
@@ -112,16 +112,16 @@
 }
 
 @keyframes player-light-sweep {
-  0%, 18% {
+  0% {
     opacity: 0;
     transform: rotate(28deg) translateX(-130vw);
   }
 
-  42% {
+  45% {
     opacity: 0.34;
   }
 
-  70%, 100% {
+  100% {
     opacity: 0;
     transform: rotate(28deg) translateX(250vw);
   }
